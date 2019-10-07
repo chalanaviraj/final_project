@@ -49,6 +49,14 @@ class MineSweeperTest(unittest.TestCase):
     	self.assertTrue(block4.is_revealed)
 
     def test_game_stops_when_adjancent_nodes_have_same_color(self):
+    	self.game.generate_colored_map()
+    	self.game.set_color(0,0,0)
+    	self.game.set_color(0,1,0)
+    	block1 = self.game.grid.itemAtPosition(0, 0).widget()
+    	block2 = self.game.grid.itemAtPosition(0, 1).widget()
+    	block1.click()
+    	block2.click()
+    	self.assertEqual(self.game.gameStatus, 0)
         
 
     	
