@@ -19,6 +19,12 @@ class MineSweeperTest(unittest.TestCase):
         block.click()
         self.assertEqual(block.is_revealed, True)
 
+    def test_hex_block_is_revealed(self):
+        self.game.generate_hex_map()
+        block = self.game.grid.itemAtPosition(0, 0).widget()
+        block.click()
+        self.assertEqual(block.is_revealed, True)
+
 
     def test_game_ends_when_mine_is_revealed(self):
     	self.game.generate_square_map()
@@ -28,21 +34,21 @@ class MineSweeperTest(unittest.TestCase):
     	self.assertEqual(self.game.gameStatus, 0)
 
     def test_expandable_block(self):
-    	self.game.generate_square_map()
-    	self.game.remove_mine_from(0, 0)
-    	self.game.remove_mine_from(0, 1)
-    	self.game.remove_mine_from(1, 0)
-    	self.game.remove_mine_from(1, 1)
-    	block1 = self.game.grid.itemAtPosition(0, 0).widget()
-    	block2 = self.game.grid.itemAtPosition(0, 1).widget()
-    	block3 = self.game.grid.itemAtPosition(1, 0).widget()
-    	block4 = self.game.grid.itemAtPosition(1, 1).widget()
-    	block1.click()
-    	self.assertTrue(block1.is_revealed)
-    	self.assertTrue(block2.is_revealed)
-    	self.assertTrue(block3.is_revealed)
-    	self.assertTrue(block4.is_revealed)
-
+        self.game.generate_square_map()
+        self.game.remove_mine_from(0, 0)
+        self.game.remove_mine_from(0, 1)
+        self.game.remove_mine_from(1, 0)
+        self.game.remove_mine_from(1, 1)
+        block1 = self.game.grid.itemAtPosition(0, 0).widget()
+        block2 = self.game.grid.itemAtPosition(0, 1).widget()
+        block3 = self.game.grid.itemAtPosition(1, 0).widget()
+        block4 = self.game.grid.itemAtPosition(1, 1).widget()
+        block1.adjacent_nodes = self.game.get_adjacent_nodes(0, 0)
+        block1.click()
+        self.assertTrue(block1.is_revealed)
+        self.assertTrue(block2.is_revealed)
+        self.assertTrue(block3.is_revealed)
+        self.assertTrue(block4.is_revealed)
     	
 
 
